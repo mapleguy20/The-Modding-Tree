@@ -14,8 +14,10 @@ addLayer("m", {
     type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
     exponent: 0.5, // Prestige currency exponent
     gainMult() { // Calculate the multiplier for main currency from bonuses
-        mult = new Decimal(1)
-        return mult
+        let mult = new Decimal(1)
+        if (hasUpgrade('m', 13)) mult = mult.times(upgradeEffect('m', 13))
+        if (hasUpgrade('m', 14)) mult = mult.times(2)
+            return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
         return new Decimal(1)
@@ -53,5 +55,15 @@ addLayer("m", {
                 return format(upgradeEffect(this.layer, this.id))+"x" 
             }, // Add formatting to the effect
         },
+        14: {
+            title:  "double boost?!?",
+            description: "1.5x maple fragment gain and 2x maple point gain.",
+            cost: new Decimal(22),
+        },
+        15: {
+            title:  "the row 1 finisher",
+            description: "5x maple fragment gain, upgrades will get more expensive from here on.",
+            cost: new Decimal(100),
+        },
     },
-})
+});
