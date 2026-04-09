@@ -17,6 +17,7 @@ addLayer("m", {
         let mult = new Decimal(1)
         if (hasUpgrade('m', 13)) mult = mult.times(upgradeEffect('m', 13))
         if (hasUpgrade('m', 14)) mult = mult.times(2)
+        if (hasUpgrade('m', 22)) mult = mult.times(3.25)    
             return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
@@ -29,7 +30,7 @@ addLayer("m", {
     layerShown(){return true},
     upgrades: {
         11: {
-            title: "THE FIRST UPGRADE",
+            title: "hey look its the beginning!",
             description: "double your maple fragment gain.",
             cost: new Decimal(1),
         },    
@@ -64,6 +65,21 @@ addLayer("m", {
             title:  "the row 1 finisher",
             description: "5x maple fragment gain, upgrades will get more expensive from here on.",
             cost: new Decimal(100),
+        },
+        21: {
+            title:  "ah yes, an another row, isnt this great?",
+            description: "maple fragments boost themselves (this currently doesnt work because i dont fucking know how to make it work).",
+            cost: new Decimal(900),
+        },
+        22: {
+            title:  "we love inflation, dont we?",
+            description: "10x maple fragments and 3.25x maple points.",
+            cost: new Decimal(3000),
+        },
+        23: {
+            title:  "the first filler of many",
+            description: "1.01x maple fragments, the worst upgrade so far.",
+            cost: new Decimal(35000),
         },
     },
 });

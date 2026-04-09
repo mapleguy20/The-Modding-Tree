@@ -12,15 +12,14 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.02",
-	name: "the maple update : 3.0 version",
+	num: "0.025",
+	name: "the maple inflation update",
 }
 
 let changelog = `<h1>Changelog:</h1><br>
-	<h3>v0.02</h3><br>
-		- fixed a bug that messed up the game.<br>
-		- started working on maple point upgrades row 2.
-        - finished maple point upgrades (row 1).`
+	<h3>v0.025</h3><br>
+		- started working on the final 2 upgrades of row 2.<br>
+		- finished row 2's first 3 upgrades.<br>`
 let winText = `Congratulations! You have reached the end and beaten this game, but for now...`
 
 // If you add new functions anywhere inside of a layer, and those functions have an effect when called, add them here.
@@ -45,7 +44,9 @@ function getPointGen() {
 	if (hasUpgrade('m', 11)) gain = gain.times(2)
 	if (hasUpgrade('m', 12)) gain = gain.times(upgradeEffect('m', 12))
     if (hasUpgrade('m', 14)) gain = gain.times(1.5)
-	if (hasUpgrade('m', 15)) gain = gain.times(5)	
+	if (hasUpgrade('m', 15)) gain = gain.times(5)
+	if (hasUpgrade('m', 22)) gain = gain.times(10)
+	if (hasUpgrade('m', 23)) gain = gain.times(1.01) // this is a filler upgrade, the boost is shit			
 		return gain
 }
 
