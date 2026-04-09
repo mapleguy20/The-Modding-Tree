@@ -6,7 +6,7 @@ addLayer("m", {
         unlocked: true,
 		points: new Decimal(0),
     }},
-    color: "#4BDC13",
+    color: "#ffd900",
     requires: new Decimal(10), // Can be a function that takes requirement increases into account
     resource: "maple points", // Name of prestige currency
     baseResource: "maple fragments", // Name of resource prestige is based on
@@ -24,5 +24,13 @@ addLayer("m", {
     hotkeys: [
         {key: "m", description: "M: Reset for maple points", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
-    layerShown(){return true}
+    layerShown(){return true},
+upgrades: {
+    11: {
+        title: "THE FIRST UPGRADE",
+        description: "double your maple fragment gain.",
+        cost: new Decimal(1),
+        
+    }
+},
 })
