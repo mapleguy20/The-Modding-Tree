@@ -1,26 +1,26 @@
 let modInfo = {
-	name: "The maple Tree",
+	name: "The Maple Tree",
 	author: "MapleGuy20",
 	pointsName: "Maple Fragments",
 	modFiles: ["layers.js", "tree.js"],
 
 	discordName: "",
 	discordLink: "",
-	initialStartPoints: new Decimal (10), // Used for hard resets and new players
+	initialStartPoints: new Decimal (1), // Used for hard resets and new players
 	offlineLimit: 1,  // In hours
 }
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.0",
-	name: "Literally nothing",
+	num: "0.017",
+	name: "the maple update : 2.0 version",
 }
 
 let changelog = `<h1>Changelog:</h1><br>
-	<h3>v0.015</h3><br>
-		- renamed prestige to maple points and made maple points orange.<br>
-		- made the whole game exist.
-        - added 1 upgrade.`
+	<h3>v0.017</h3><br>
+		- fixed a bug that messed up the game.<br>
+		- started working on more maple point upgrades.
+        - added 2 upgrades.`
 let winText = `Congratulations! You have reached the end and beaten this game, but for now...`
 
 // If you add new functions anywhere inside of a layer, and those functions have an effect when called, add them here.
@@ -43,7 +43,10 @@ function getPointGen() {
 
 	let gain = new Decimal(1)
 	if (hasUpgrade('m', 11)) gain = gain.times(2)
-	return gain
+	if (hasUpgrade('m', 12)) gain = gain.times(upgradeEffect('m', 12))	
+    if (hasUpgrade('m', 13)) mult = mult.times(upgradeEffect('m', 13))
+
+		return gain
 }
 
 // You can add non-layer related variables that should to into "player" and be saved here, along with default values

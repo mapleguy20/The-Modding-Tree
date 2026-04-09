@@ -25,12 +25,33 @@ addLayer("m", {
         {key: "m", description: "M: Reset for maple points", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
     layerShown(){return true},
-upgrades: {
-    11: {
-        title: "THE FIRST UPGRADE",
-        description: "double your maple fragment gain.",
-        cost: new Decimal(1),
-        
-    }
-},
+    upgrades: {
+        11: {
+            title: "THE FIRST UPGRADE",
+            description: "double your maple fragment gain.",
+            cost: new Decimal(1),
+        },    
+        12: { 
+            title: "making stuff complicated",
+            description: "maple points boost maple fragment gain.",
+            cost: new Decimal(2),
+            effect() {
+            return player[this.layer].points.add(1).pow(0.5)
+            },
+            effectDisplay() { 
+                return format(upgradeEffect(this.layer, this.id))+"x" 
+            }, // Add formatting to the effect
+        },
+        13: {
+            title: "now we do the opposite!",
+            description: "maple fragments boost maple point gain.",
+            cost: new Decimal(6),
+            effect() {
+            return player.points.add(1).pow(0.15)
+            },
+            effectDisplay() { 
+                return format(upgradeEffect(this.layer, this.id))+"x" 
+            }, // Add formatting to the effect
+        },
+    },
 })
