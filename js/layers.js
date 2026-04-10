@@ -18,7 +18,8 @@ addLayer("m", {
         if (hasUpgrade('m', 13)) mult = mult.times(upgradeEffect('m', 13))
         if (hasUpgrade('m', 14)) mult = mult.times(2)
         if (hasUpgrade('m', 22)) mult = mult.times(3.25)
-        if (hasUpgrade('m', 24)) mult = mult.times(1.01) // haha another filler to piss you off   
+        if (hasUpgrade('m', 24)) mult = mult.times(1.01) // haha another filler to piss you off
+        if (hasUpgrade('m', 31)) mult = mult.times(upgradeEffect('m', 31))   
             return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
@@ -89,10 +90,21 @@ addLayer("m", {
         },
         25: {
             title:  "ending off this row of inflation and filler...",
-            description: "maple fragments boost maple point gain again, but this time the boost is weakened from add(1).pow(0.5) to add(1).pow(0.4).",
+            description: "maple fragments boost maple point gain again, but this time the boost is weakened from.",
             cost: new Decimal(66666),
             effect() {
             return player[this.layer].points.add(1).pow(0.4)
+            },
+            effectDisplay() { 
+                return format(upgradeEffect(this.layer, this.id))+"x" 
+            }, // Add formatting to the effect
+        },
+        31: {
+            title:  "can we stop weakening boosts now?",
+            description: "maple points boost maple fragment gain again, but this time the boost is weakened.",
+            cost: new Decimal(600000),
+             effect() {
+            return player.points.add(1).pow(0.1)
             },
             effectDisplay() { 
                 return format(upgradeEffect(this.layer, this.id))+"x" 

@@ -12,14 +12,15 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.0275",
-	name: "the maple fillerflation update",
+	num: "0.028",
+	name: "the maple update reboosted",
 }
 
 let changelog = `<h1>Changelog:</h1><br>
-	<h3>v0.0275</h3><br>
+	<h3>v0.028</h3><br>
 		- started working on row 3 upgrades.<br>
-		- finished row 2's final 2 upgrades.<br>`
+		- finished row 3's first upgrade.<br>
+		- changed description of upgrade 25 (10).<br>`
 let winText = `Congratulations! You have reached the end and beaten this game, but for now...`
 
 // If you add new functions anywhere inside of a layer, and those functions have an effect when called, add them here.
