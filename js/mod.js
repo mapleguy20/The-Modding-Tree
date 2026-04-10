@@ -7,20 +7,22 @@ let modInfo = {
 	discordName: "",
 	discordLink: "",
 	initialStartPoints: new Decimal (1), // Used for hard resets and new players
-	offlineLimit: 1,  // In hours
+	offlineLimit: 0.1,  // In hours
 }
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.028",
-	name: "the maple update reboosted",
+	num: "0.03 part 1",
+	name: "the row 3 semi-update",
 }
 
 let changelog = `<h1>Changelog:</h1><br>
-	<h3>v0.028</h3><br>
-		- started working on row 3 upgrades.<br>
-		- finished row 3's first upgrade.<br>
-		- changed description of upgrade 25 (10).<br>`
+	<h3>v0.03 part 1</h3><br>
+		- added a placeholder static layer called maple power.<br>
+		- finished row 3's 2nd to 4th upgrade.<br>
+		- made mass inflation.<br>
+		- nerfed offline time from 1 hour to 6 minutes.<br>
+		- i still cant figure out how to make upgrade 21 (6) work.<br>`
 let winText = `Congratulations! You have reached the end and beaten this game, but for now...`
 
 // If you add new functions anywhere inside of a layer, and those functions have an effect when called, add them here.
@@ -48,7 +50,9 @@ function getPointGen() {
 	if (hasUpgrade('m', 15)) gain = gain.times(5)
 	if (hasUpgrade('m', 22)) gain = gain.times(10)
 	if (hasUpgrade('m', 23)) gain = gain.times(1.01) // this is a filler upgrade, the boost is shit
-	if (hasUpgrade('m', 25)) gain = gain.times(upgradeEffect('m', 25))			
+	if (hasUpgrade('m', 25)) gain = gain.times(upgradeEffect('m', 25))
+	if (hasUpgrade('m', 32)) gain = gain.times(upgradeEffect('m', 32))
+	if (hasUpgrade('m', 34)) gain = gain.times(1200)
 		return gain
 }
 
@@ -62,7 +66,7 @@ var displayThings = [
 
 // Determines when the game "ends"
 function isEndgame() {
-	return player.points.gte(new Decimal("e280000000"))
+	return player.points.gte(new Decimal("1e10000"))
 }
 
 
