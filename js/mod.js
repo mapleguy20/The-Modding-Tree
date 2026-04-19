@@ -12,16 +12,16 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.03 part 1",
-	name: "the row 3 semi-update",
+	num: "0.03 part 2",
+	name: "the row 3 semi-update 2",
 }
 
 let changelog = `<h1>Changelog:</h1><br>
-	<h3>v0.03 part 1</h3><br>
-		- added a placeholder static layer called maple power.<br>
-		- finished row 3's 2nd to 4th upgrade.<br>
-		- made mass inflation.<br>
-		- nerfed offline time from 1 hour to 6 minutes.<br>
+	<h3>v0.03 part 2</h3><br>
+		- nerfed some upgrade costs in row 2.<br>
+		- finished row 3's 5th upgrade and added a placeholder upgrade for maple power.<br>
+		- removed mass inflation as upgrades 32 and 33 (12 and 13) were reworked.<br>
+		- reworked upgrade 34 (14), buffed upgrade 14 (4) and slightly buffed upgrade 11 (1).<br>
 		- i still cant figure out how to make upgrade 21 (6) work.<br>`
 let winText = `Congratulations! You have reached the end and beaten this game, but for now...`
 
@@ -44,15 +44,17 @@ function getPointGen() {
 		return new Decimal(0)
 
 	let gain = new Decimal(1)
-	if (hasUpgrade('m', 11)) gain = gain.times(2)
+	if (hasUpgrade('m', 11)) gain = gain.times(2.2)
 	if (hasUpgrade('m', 12)) gain = gain.times(upgradeEffect('m', 12))
-    if (hasUpgrade('m', 14)) gain = gain.times(1.5)
+    if (hasUpgrade('m', 14)) gain = gain.times(1.75)
 	if (hasUpgrade('m', 15)) gain = gain.times(5)
 	if (hasUpgrade('m', 22)) gain = gain.times(10)
 	if (hasUpgrade('m', 23)) gain = gain.times(1.01) // this is a filler upgrade, the boost is shit
 	if (hasUpgrade('m', 25)) gain = gain.times(upgradeEffect('m', 25))
-	if (hasUpgrade('m', 32)) gain = gain.times(upgradeEffect('m', 32))
-	if (hasUpgrade('m', 34)) gain = gain.times(1200)
+	if (hasUpgrade('m', 32)) gain = gain.times(0.95)// this upgrade nerfs you intentionally, the next upgrades make up for it
+	if (hasUpgrade('m', 34)) gain = gain.times(144)
+	// this is a separator inbetween maple points and maple power	
+	if (hasUpgrade('mp', 11)) gain = gain.times(5)
 		return gain
 }
 

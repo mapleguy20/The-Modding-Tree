@@ -20,9 +20,10 @@ addLayer("m", {
         if (hasUpgrade('m', 22)) mult = mult.times(3.25)
         if (hasUpgrade('m', 24)) mult = mult.times(1.01) // haha another filler to piss you off
         if (hasUpgrade('m', 31)) mult = mult.times(upgradeEffect('m', 31))
-        if (hasUpgrade('m', 33)) mult = mult.times(upgradeEffect('m', 33))
-        if (hasUpgrade('m', 34)) mult = mult.times(0.7) // you do get 1200x maple fragments gain in exchange for this nerf
-            return mult
+        if (hasUpgrade('m', 33)) mult = mult.times(10.1)
+        if (hasUpgrade('m', 34)) mult = mult.times(12.5) // you get 144x maple fragments gain with this
+        if (hasUpgrade('mp', 11)) mult = mult.times(2)
+        return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
         return new Decimal(1)
@@ -35,7 +36,7 @@ addLayer("m", {
     upgrades: {
         11: {
             title: "hey look its the beginning!",
-            description: "double your maple fragment gain.",
+            description: "2.2x your maple fragment gain.",
             cost: new Decimal(1),
         },    
         12: { 
@@ -64,7 +65,7 @@ addLayer("m", {
         },
         14: {
             title:  "double boost?!?",
-            description: "1.5x maple fragment gain and 2x maple point gain.",
+            description: "1.75x maple fragment gain and 2x maple point gain.",
             cost: new Decimal(22),
             unlocked() {return hasUpgrade(this.layer, 13)},
             
@@ -85,25 +86,25 @@ addLayer("m", {
         22: {
             title:  "we love inflation, dont we?",
             description: "10x maple fragments and 3.25x maple points.",
-            cost: new Decimal(3000),
+            cost: new Decimal(2500),
             unlocked() {return hasUpgrade(this.layer, 21)},
         },
         23: {
             title:  "the first filler of many",
             description: "1.01x maple fragments, the worst upgrade so far.",
-            cost: new Decimal(35000),
+            cost: new Decimal(30000),
             unlocked() {return hasUpgrade(this.layer, 22)},
         },
         24: {
             title:  "i sure do like filler upgrades",
             description: "for good measure, gain 1.01x maple points. you will need it.",
-            cost: new Decimal(40000),
+            cost: new Decimal(31000),
             unlocked() {return hasUpgrade(this.layer, 23)},
         },
         25: {
             title:  "ending off this row of inflation and filler...",
             description: "maple fragments boost maple point gain again, but this time the boost is weakened.",
-            cost: new Decimal(66666),
+            cost: new Decimal(60000),
             effect() {
             return player[this.layer].points.add(1).pow(0.4)
             },
@@ -125,21 +126,15 @@ addLayer("m", {
             unlocked() {return hasUpgrade(this.layer, 25)},
         },
         32: {
-            title:  "reward for suffering through weak boosts",
-            description: "maple fragments boost maple point gain yet again, but this time the boost is way weaker.",
+            title:  "the injury",
+            description: "0.95x maple fragment gain, next upgrades make up for this.",
             cost: new Decimal(2e7),
-            effect() {
-            return player[this.layer].points.add(1).pow(0.25)
-            },
-            effectDisplay() { 
-                return format(upgradeEffect(this.layer, this.id))+"x" 
-            }, // Add formatting to the effect
             unlocked() {return hasUpgrade(this.layer, 31)},
         },
         33: {
-            title:  "we do some more buffs",
-            description: "maple points boost maple fragment gain again, but this time the boost is way weaker.",
-            cost: new Decimal(2.5e17),
+            title:  "caring for the weak",
+            description: "10.1x maple point gain.",
+            cost: new Decimal(1e8),
              effect() {
             return player.points.add(1).pow(0.1)
             },
@@ -149,9 +144,9 @@ addLayer("m", {
             unlocked() {return hasUpgrade(this.layer, 32)},
         },
         34: {
-            title:  "insult to injury",
-            description: "1200x maple fragment gain, but /0.7 maple point gain.",
-            cost: new Decimal(1e75),
+            title:  "double boost 2 : electric boogaloo",
+            description: "144x maple fragment gain and 12.5x maple point gain.",
+            cost: new Decimal(2e9),
             unlocked() {return hasUpgrade(this.layer, 33)},
         }
     },
@@ -169,8 +164,7 @@ addLayer("mp", {
 
     baseResource: "maple points",                 // The name of the resource your prestige gain is based on.
     baseAmount() { return player.points },  // A function to return the current amount of baseResource.
-
-    requires: new Decimal(1e10000),              // The amount of the base needed to  gain 1 of the prestige currency.
+    requires: new Decimal(1e50),              // The amount of the base needed to  gain 1 of the prestige currency.
                                             // Also the amount required to unlock the layer.
 
     type: "static",                         // Determines the formula used for calculating prestige currency.
@@ -186,6 +180,10 @@ addLayer("mp", {
     layerShown() { return true },          // Returns a bool for if this layer's node should be visible in the tree.
 
     upgrades: {
-        
+         11: {
+            title: "hey look its a new beginning!",
+            description: "5x maple fragment gain, and 2x maple point gain.",
+            cost: new Decimal(1),
+        },
     },
 })
