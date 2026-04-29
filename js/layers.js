@@ -22,8 +22,11 @@ addLayer("m", {
         if (hasUpgrade('m', 31)) mult = mult.times(upgradeEffect('m', 31))
         if (hasUpgrade('m', 33)) mult = mult.times(10.1)
         if (hasUpgrade('m', 34)) mult = mult.times(12.5) // you get 144x maple fragments gain with this
+        // upgrade separator
         if (hasUpgrade('mp', 11)) mult = mult.times(2)
-        return mult
+        // milestone separator
+        if (hasMilestone('m', 11)) mult = mult.times(22.5)
+            return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
         return new Decimal(1)
@@ -33,6 +36,44 @@ addLayer("m", {
         {key: "m", description: "M: Reset for maple points", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
     layerShown(){return true},
+    tabFormat : {
+        "Main":  {
+            content : [
+                "main-display",
+                "prestige-button",
+                "blank",
+                "upgrades"
+            ],
+        },
+        "Info":  {
+            content : [
+                ["infobox", "i1"],
+                ["infobox", "i2"],
+            ],
+        },
+        "Milestones":  {
+            content : [
+                "milestones",
+            ],
+        },
+    },
+    infoboxes: {
+        i1: {
+            title : "base game info",
+            body() { return "hi, this is my game, expect the game to be somewhat low quality as im not good at coding"},
+        },
+        i2: {
+            title : "stuff that currently dont work",
+            body() { return "as of v0.038, upgrade 21 (6) doesnt work"},
+        },
+    },
+    milestones: {
+    11: {
+        requirementDescription: "1e10 maple points",
+        effectDescription: "55x maple fragments and 22.5x maple points",
+        done() { return player.m.points.gte(1e10) }
+    }
+},                                 
     upgrades: {
         11: {
             title: "hey look its the beginning!",
@@ -164,7 +205,7 @@ addLayer("mp", {
 
     baseResource: "maple points",                 // The name of the resource your prestige gain is based on.
     baseAmount() { return player.points },  // A function to return the current amount of baseResource.
-    requires: new Decimal(1e50),              // The amount of the base needed to  gain 1 of the prestige currency.
+    requires: new Decimal(1e15),              // The amount of the base needed to  gain 1 of the prestige currency.
                                             // Also the amount required to unlock the layer.
 
     type: "static",                         // Determines the formula used for calculating prestige currency.
@@ -178,7 +219,22 @@ addLayer("mp", {
     },
 
     layerShown() { return true },          // Returns a bool for if this layer's node should be visible in the tree.
-
+tabFormat : {
+        "Main":  {
+            content : [
+                "main-display",
+                "prestige-button",
+                "blank",
+                "upgrades"
+            ],
+        },
+    },
+    infoboxes: {
+        i3: {
+            title : "the new layer",
+            body() { return "this layer resets everything before, and its a static layer."},
+        },
+    },    
     upgrades: {
          11: {
             title: "hey look its a new beginning!",
@@ -186,4 +242,4 @@ addLayer("mp", {
             cost: new Decimal(1),
         },
     },
-})
+});

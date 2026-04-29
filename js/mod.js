@@ -12,16 +12,16 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.03 part 2",
-	name: "the row 3 semi-update 2",
+	num: "0.038",
+	name: "the update where i learned new stuff.",
 }
 
 let changelog = `<h1>Changelog:</h1><br>
-	<h3>v0.03 part 2</h3><br>
-		- nerfed some upgrade costs in row 2.<br>
-		- finished row 3's 5th upgrade and added a placeholder upgrade for maple power.<br>
-		- removed mass inflation as upgrades 32 and 33 (12 and 13) were reworked.<br>
-		- reworked upgrade 34 (14), buffed upgrade 14 (4) and slightly buffed upgrade 11 (1).<br>
+	<h3>v0.038</h3><br>
+		- made 3 tabs for maple points (main, milestones and info)<br>
+		- fixed a bug where maple point milestone 1 broke the game.<br>
+		- added milestones.<br>
+		- lowered the price of maple power as i will actually start working on it soon enough.<br> 
 		- i still cant figure out how to make upgrade 21 (6) work.<br>`
 let winText = `Congratulations! You have reached the end and beaten this game, but for now...`
 
@@ -55,6 +55,8 @@ function getPointGen() {
 	if (hasUpgrade('m', 34)) gain = gain.times(144)
 	// this is a separator inbetween maple points and maple power	
 	if (hasUpgrade('mp', 11)) gain = gain.times(5)
+	// milestone separator
+	if (hasMilestone('m', 11)) gain = gain.times(55)	
 		return gain
 }
 
